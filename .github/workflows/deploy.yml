@@ -26,10 +26,10 @@ jobs:
 
       - name: Build and deploy
         run: |
-          docker-compose up --build -d
+          docker compose up --build -d
 
       - name: Verify services
         run: |
           sleep 15  # Wait for services to start
-          docker-compose ps
+          docker compose ps
           curl -f http://localhost:5000/api/visits || docker-compose logs backend
