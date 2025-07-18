@@ -1,0 +1,11 @@
+# Node
+node_modules/
+package-lock.json
+*.log
+
+# Frontend specific
+frontend/.env
+frontend/build/
+
+# General
+.DS_Store
