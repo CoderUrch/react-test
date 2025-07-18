@@ -1,40 +1,43 @@
-version: '3.8'
+version: "3.9"
 
 services:
-  frontend:
-    image: urchytech/frontend:latest
-    ports:
-      - "3000:80"
-    depends_on:
-      - backend
-    networks:
-      - appnet
-
-  backend:
-    image: urchytech/backend:latest
-    ports:
-      - "5000:5000"
-    env_file:
-      - .env
-    depends_on:
-      - db
-    networks:
-      - appnet
-
   db:
     image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+
     networks:
-      - appnet
+      - app-net
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: "${DB_HOST}"
+      DB_PORT: "${DB_PORT}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_NAME: "${DB_NAME}"
+
+    networks:
+      - app-net
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-net
 
 volumes:
   pgdata:
 
 networks:
-  appnet:
+  app-net:
