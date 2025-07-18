@@ -9,3 +9,6 @@ frontend/build/
 
 # General
 .DS_Store
+
+demo.pem
+
