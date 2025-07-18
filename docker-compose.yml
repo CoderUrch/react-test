@@ -4,7 +4,7 @@ services:
   db:
     image: postgres:15
     ports:
-      - "${DB_PORT}:${DB_PORT}"
+      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     environment:
@@ -16,7 +16,7 @@ services:
       - app-net
 
   backend:
-    build: ./backend
+    image: urchytech/backend:latest
     ports:
       - "5000:5000"
     environment:
@@ -30,7 +30,7 @@ services:
       - app-net
 
   frontend:
-    build: ./frontend
+    image: urchytech/frontend:latest
     ports:
       - "3000:80"
     networks:
