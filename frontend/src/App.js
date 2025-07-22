@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Welcome! Chemical Engineer, Sylvia Abor 👋</h1>
+      <h1>Welcome! DevOps Engineer, Uche Abor 👋</h1>
       <p>This is your first React UI containerized for learning!</p>
       <p>{count !== null ? `Visits recorded: ${count}` : 'Loading...'}</p>
     </div>
