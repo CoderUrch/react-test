@@ -10,4 +10,4 @@ export DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id $SECRET_ID 
 export DB_NAME=$(aws secretsmanager get-secret-value --secret-id $SECRET_ID --query 'SecretString' --output text | jq -r .DB_NAME)
 
 # ✅ Use envsubst to substitute variables before Compose parses them
-envsubst < docker-compose.yml | docker-compose -f - up --build -d
+envsubst < docker-compose.yml | docker compose up --build -d
